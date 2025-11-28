@@ -1,0 +1,31 @@
+a,b,c,expected
+3,3,3,Tam giác đều
+10,10,10,Tam giác đều
+5.5,5.5,5.5,Tam giác đều
+4,4,5,Tam giác cân
+6,6,7,Tam giác cân
+8,8,5,Tam giác cân
+9,7,9,Tam giác cân
+12,10,12,Tam giác cân
+3,3,4.2,Tam giác cân
+100,100,150,Tam giác cân
+3,4,5,Tam giác thường
+5,6,7,Tam giác thường
+7,8,9,Tam giác thường
+4,5,6,Tam giác thường
+8,10,12,Tam giác thường
+10,11,12,Tam giác thường
+2.5,3.5,4.5,Tam giác thường
+1,2,3,Không phải tam giác
+2,5,8,Không phải tam giác
+10,4,5,Không phải tam giác
+5,1,1,Không phải tam giác
+3,7,11,Không phải tam giác
+9,2,4,Không phải tam giác
+1,10,12,Không phải tam giác
+-1,2,3,Không phải tam giác
+0,0,0,Không phải tam giác
+3,4,0,Không phải tam giác
+1,1,-1,Không phải tam giác
+5,-5,5,Không phải tam giác
+-3,-4,-5,Không phải tam giác

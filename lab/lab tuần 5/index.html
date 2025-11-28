@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Traffic Light Simulation</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>🚦 Đèn giao thông ngã tư do Võ Duy Bình</h1>
+
+  <div class="intersection">
+    <div class="light north">
+      <div class="lamp red"></div>
+      <div class="lamp yellow"></div>
+      <div class="lamp green"></div>
+      <span>Bắc</span>
+	  <div class="countdown" id="timer-north">--</div>
+    </div>
+
+    <div class="light south">
+      <div class="lamp red"></div>
+      <div class="lamp yellow"></div>
+      <div class="lamp green"></div>
+      <span>Nam</span>
+	   <div class="countdown" id="timer-south">--</div>
+    </div>
+
+    <div class="light east">
+      <div class="lamp red"></div>
+      <div class="lamp yellow"></div>
+      <div class="lamp green"></div>
+      <span>Đông</span>
+	  <div class="countdown" id="timer-east">--</div>
+    </div>
+
+    <div class="light west">
+      <div class="lamp red"></div>
+      <div class="lamp yellow"></div>
+      <div class="lamp green"></div>
+      <span>Tây</span>
+	  <div class="countdown" id="timer-west">--</div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button id="ped">🚶 Pedestrian</button>
+    <button id="emergency">🚒 Emergency</button>
+    <button id="night">🌙 Night Mode</button>
+    <button id="next">⏭ Manual Step</button>
+  </div>
+
+  <div class="status">
+    <p>Trạng thái hiện tại: <span id="stateName">S01 - EW_AllRed</span></p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

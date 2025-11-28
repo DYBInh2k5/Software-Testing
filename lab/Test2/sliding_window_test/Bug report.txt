@@ -1,0 +1,13 @@
+BUG REPORT – 
+
+Tên bug: Hàm trả về probabilities rỗng mà không có cảnh báo khi total_windows = 0
+Mô tả lỗi: Khi tất cả mảng trong arrays đều có độ dài < n hoặc arrays = [], hàm vẫn chạy thành công nhưng probabilities = {} và không có thông báo gì.
+
+Lỗi gì xảy ra? → probabilities trả về dict rỗng (có thể gây hiểu nhầm là không có dữ liệu)
+Khi thực hiện hành động nào? → Gọi hàm sliding_window_probabilities với input không tạo được window nào
+Trong điều kiện nào? → total_windows = 0 (arrays rỗng hoặc mọi arr đều ngắn hơn n)
+
+Expected Result: Nên raise Exception hoặc trả về thông báo rõ ràng (ví dụ: "No windows generated")
+Actual Result: Trả về {}, Counter(), 0 → không lỗi nhưng dễ gây nhầm lẫn
+Severity: Low (không crash)
+Recommended Action: Thêm điều kiện kiểm tra và raise ValueError nếu total_windows == 0

@@ -1,0 +1,7 @@
+D:\HSU\2531Semester 1(2025-2026)\software testing\lab\lab tuần 4\Week04_TestApp\Week04_TestApp\bin\Debug\Week04_TestApp.exe.config
+D:\HSU\2531Semester 1(2025-2026)\software testing\lab\lab tuần 4\Week04_TestApp\Week04_TestApp\bin\Debug\Week04_TestApp.exe
+D:\HSU\2531Semester 1(2025-2026)\software testing\lab\lab tuần 4\Week04_TestApp\Week04_TestApp\bin\Debug\Week04_TestApp.pdb
+D:\HSU\2531Semester 1(2025-2026)\software testing\lab\lab tuần 4\Week04_TestApp\Week04_TestApp\obj\Debug\Week04_TestApp.csproj.AssemblyReference.cache
+D:\HSU\2531Semester 1(2025-2026)\software testing\lab\lab tuần 4\Week04_TestApp\Week04_TestApp\obj\Debug\Week04_TestApp.csproj.CoreCompileInputs.cache
+D:\HSU\2531Semester 1(2025-2026)\software testing\lab\lab tuần 4\Week04_TestApp\Week04_TestApp\obj\Debug\Week04_TestApp.exe
+D:\HSU\2531Semester 1(2025-2026)\software testing\lab\lab tuần 4\Week04_TestApp\Week04_TestApp\obj\Debug\Week04_TestApp.pdb
