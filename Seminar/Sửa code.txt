@@ -1,0 +1,223 @@
+/// <reference types="cypress" />
+
+describe('Login Function - Full Test Suite', () => {
+
+  // ------------------------------------------------------------
+  //                   GLOBAL HOOKS
+  // ------------------------------------------------------------
+
+  before(() => {
+    cy.log('🔹 Bắt đầu toàn bộ Test Suite')
+  })
+
+  beforeEach(() => {
+    cy.visit('https://practicetestautomation.com/practice-test-login/')
+    cy.viewport(1280, 720)
+  })
+
+  afterEach(function () {
+    const testName = this.currentTest.title.replace(/[:/\\?<>|"]/g, '_')
+    cy.screenshot(`screens/${testName}`)
+    cy.log('✅ Test Case hoàn tất & chụp ảnh kết quả')
+  })
+
+  after(() => {
+    cy.log('🏁 Kết thúc toàn bộ Test Suite')
+  })
+
+
+
+  // ------------------------------------------------------------
+  //                   TEST CASES CHÍNH THỨC
+  // ------------------------------------------------------------
+
+  it('TC01 - Login đúng thông tin', () => {
+    cy.fixture('loginData').then((data) => {
+
+      cy.get('#username')
+        .focus()
+        .type(data.validUser.username)
+        .should('have.value', data.validUser.username)
+
+      cy.get('#password')
+        .type(data.validUser.password)
+
+      cy.get('#submit')
+        .scrollIntoView()
+        .click()
+        .should('be.enabled')
+
+      cy.url().should('include', 'logged-in-successfully')
+      cy.contains('Congratulations').should('be.visible')
+    })
+  })
+
+
+
+  it('TC02 - Sai mật khẩu', () => {
+    cy.fixture('loginData').then((data) => {
+
+      cy.get('#username').type(data.invalidUser.username)
+      cy.get('#password').type(data.invalidUser.password)
+
+      cy.get('#submit').click()
+
+      cy.contains('Your password is invalid!')
+        .should('be.visible')
+    })
+  })
+
+
+
+  it('TC03 - Sai username', () => {
+    cy.fixture('loginData').then((data) => {
+
+      cy.get('#username').type(data.unknownUser.username)
+      cy.get('#password').type(data.unknownUser.password)
+
+      cy.get('#submit').click()
+
+      cy.contains('Your username is invalid!')
+        .should('be.visible')
+    })
+  })
+
+
+
+  it('TC04 - Username rỗng', () => {
+    cy.get('#password').type('Password123')
+    cy.get('#submit').click()
+
+    cy.contains('Please enter username')
+      .should('be.visible')
+  })
+
+
+
+  it('TC05 - Password rỗng', () => {
+    cy.get('#username').type('student')
+    cy.get('#submit').click()
+
+    cy.contains('Please enter password')
+      .should('be.visible')
+  })
+
+
+
+  it('TC06 - Cả hai trường rỗng', () => {
+    cy.get('#submit')
+      .trigger('mouseover')
+      .click()
+
+    cy.contains('Please enter username')
+      .should('be.visible')
+  })
+
+
+
+  it('TC07 - Username có khoảng trắng', () => {
+    cy.fixture('loginData').then((data) => {
+
+      cy.get('#username')
+        .type('   ' + data.validUser.username + '   ')
+        .blur()
+
+      cy.get('#password').type(data.validUser.password)
+
+      cy.get('#submit').click()
+
+      cy.url().should('include', 'logged-in-successfully')
+    })
+  })
+
+
+
+  it('TC08 - Username chứa ký tự đặc biệt', () => {
+    cy.get('#username').type('stu@dent!')
+    cy.get('#password').type('Password123')
+
+    cy.get('#submit').dblclick()
+
+    cy.contains('Your username is invalid!')
+      .should('be.visible')
+  })
+
+
+
+  it('TC09 - Password có khoảng trắng', () => {
+    cy.get('#username').type('student')
+    cy.get('#password').type('   Password123   ')
+
+    cy.get('#submit').click()
+
+    cy.url().should('include', 'logged-in-successfully')
+  })
+
+
+
+  it('TC10 - SQL Injection', () => {
+    cy.get('#username').type("' OR '1'='1")
+    cy.get('#password').type("' OR '1'='1")
+
+    cy.get('#submit').click()
+
+    cy.contains('Your username is invalid!')
+      .should('be.visible')
+  })
+
+
+
+  it('TC11 - XSS Injection', () => {
+    const xss = `<script>alert("XSS")</script>`
+
+    cy.get('#username').type(xss)
+    cy.get('#password').type('Password123')
+
+    cy.get('#submit').click()
+
+    cy.contains('Your username is invalid!')
+      .should('be.visible')
+  })
+
+
+
+  it('TC12 - Username viết hoa', () => {
+    cy.get('#username').type('STUDENT')
+    cy.get('#password').type('Password123')
+
+    cy.get('#submit').click()
+
+    cy.url().should('include', 'logged-in-successfully')
+  })
+
+
+
+  it('TC13 - Kiểm tra Placeholder & UI', () => {
+    cy.get('#username').should('have.attr', 'placeholder', 'Username')
+    cy.get('#password').should('have.attr', 'placeholder', 'Password')
+
+    cy.get('#submit').should('be.visible')
+  })
+
+
+
+  it('TC14 - Check nút Login bị disable nếu chưa nhập gì (nếu site hỗ trợ)', () => {
+    cy.get('#submit').should('be.enabled')  
+    // nếu website không disable button → chỉnh lại expectation tại đây
+  })
+
+
+
+  it('TC15 - Spam login 5 lần liên tục', () => {
+    for (let i = 0; i < 5; i++) {
+      cy.get('#username').clear().type('wrongUser')
+      cy.get('#password').clear().type('wrongPass')
+      cy.get('#submit').click()
+      cy.wait(300)
+    }
+
+    cy.contains('Your username is invalid!')
+      .should('be.visible')
+  })
+
+})
